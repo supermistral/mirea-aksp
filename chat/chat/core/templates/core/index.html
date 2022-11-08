@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h2>Введите пригласительный код</h2>
+        <p>
+            <form method="GET">
+                    {% csrf_token %}
+                    {{ form_invite.as_p }}
+                    <button type="submit">Войти в чат</button>
+            </form>
+        </p>
+    </div>
+    <p>или</p>
+    <div>
+        <h2>Создайте новый чат</h2>
+        <p>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form_create.as_p }}
+                <button type="submit">Создать</button>
+            </form>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+service Math {
+    rpc QuadraticEquation (QuadraticEquationRequest) returns (QuadraticEquationResponse);
+}
+
+message QuadraticEquationRequest {
+    double a = 1;
+    double b = 2;
+    double c = 3;
+}
+
+message RealRoots {
+    double x1 = 1;
+    double x2 = 2;
+}
+
+message ComplexNumber {
+    double x = 1;
+    double y = 2;
+}
+
+message ComplexRoots {
+    ComplexNumber x1 = 1;
+    ComplexNumber x2 = 2;
+}
+
+message QuadraticEquationResponse {
+    oneof roots {
+        RealRoots real = 1;
+        ComplexRoots complex = 2;
+    }
+}

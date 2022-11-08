@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Websockets app</title>
+</head>
+<body>
+    <label for="ws-input-text">Enter text: </label>
+    <input type="text" id="ws-input-text" required>
+    <button id="ws-button">Send</button>
+    <div>
+        <div>Data recieved by server</div>
+        <div id="ws-output-text"></div>
+    </div>
+
+    <script>
+        const wsPath = 'ws://localhost:8080/webs';
+        const ws = new WebSocket(wsPath);
+
+        const inputText = document.getElementById('ws-input-text');
+        const outputText = document.getElementById('ws-output-text');
+        const button = document.getElementById('ws-button');
+
+        ws.addEventListener('message', e => {
+            outputText.textContent += e.data;
+        });
+
+        button.addEventListener('click', e => {
+            if (ws.readyState !== WebSocket.CLOSED) {
+                ws.send(inputText.value);
+            }
+        });
+    </script>
+</body>
+</html>
